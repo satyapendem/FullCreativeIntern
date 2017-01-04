@@ -1,0 +1,12 @@
+Git is a revision control system, a tool to manage your source code history. GitHub is a hosting service for Git repositories. So they are not the same thing: Git the tool, GitHub the service for projects that use Git. Git is a Command based tool and where Github is Hosting service. Git helps to manage the Repositories and Github hosts the Repositories.
+
+Some of the Services like GitHub :
+
+1. GitLab : It contains a better "issue tracker" when compared to github.
+
+2. BitBucket : It is developed based on the github. It also uses git for managing Source Code.
+
+3. Kiln : It is also same as Github but We cannot create a Free repositories and We only get 30 days free trail.
+
+4. Codeplex : It is a code hosting just like a sourceforge.net but it is a paid version in 30days if we won't pay then the Repo will become public.
+
