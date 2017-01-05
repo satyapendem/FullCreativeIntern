@@ -1,14 +1,30 @@
 import java.io.*;
 import java.util.*;
 public class Demo_Exception{  
-  public static void main(String args[]){  
-   try{  
+
+	void Exception_Fun(int x)
+	{
+      try{  
     int a[]=new int[5];  
-    a[5]=30/0;  
-    System.out.println(a[7]);
+    int div=30/x;  
+    System.out.println(div);
+    int div=a[5];
+    System.out.println(div);
    }  
-   catch(ArithmeticException | ArrayIndexOutOfBoundsException e){
+   catch(ArithmeticException e){
     System.out.println(e);
-    }      
+    }
+    catch(ArrayIndexOutOfBoundsException e)
+    {
+
+    	 System.out.println(e);
+    }
+	}
+  public static void main(String args[]){ 
+    Scanner sc=new Scanner(System.in);
+    int n=sc.nextInt();
+    Demo_Exception d = new Demo_Exception();
+    d.Exception_Fun(n); 
+         
  }  
 }  

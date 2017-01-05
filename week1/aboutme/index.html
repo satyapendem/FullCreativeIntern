@@ -7,9 +7,34 @@
 <meta charset="UTF-8"> 
 
 <link type="text/css" rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+function vidplay() {
+       var video = document.getElementById("Video1");
+       var button = document.getElementById("play");
+       if (video.paused) {
+          video.play();
+          button.textContent = "||";
+       } else {
+          video.pause();
+          button.textContent = ">";
+       }
+    }
+
+    function restart() {
+        var video = document.getElementById("Video1");
+        video.currentTime = 0;
+    }
+
+    function skip(value) {
+        var video = document.getElementById("Video1");
+        video.currentTime += value;
+    }      
+</script>
+
 </head>
 <body id="top">
 <div id="cv" class="instaFade">
@@ -109,6 +134,35 @@
 				<article>
 					<h2>Intern at IIT-Madras</h2>
 					<p class="subDetails">I'm an Intern at IIT-M for one month. I worked with HADOOP Benchmarking and BOSSMOOL kernel Merging.</p>
+					<p></p>
+				</article>
+			</div>
+			<div class="clear"></div>
+		</section>
+        <section>
+			<div class="sectionTitle">
+				<h1>My Tutorials</h1>
+			</div>
+			
+			<div class="sectionContent">
+				<article>
+					<h2></h2>
+					<p class="subDetails">
+	 <video id="Video1" >
+     <source src="1.mp4" type="video/mp4" />
+     <source src="1.mp4" type="video/mp4" />
+     <a href="1.mp4">Download the video</a> file. 
+     </video>
+  
+<div id="buttonbar">
+    <button id="restart" class="fa fa-fast-stop" onclick="restart();">[]</button> 
+    <button id="rew" class="fa fa-fast-backward" onclick="skip(-10)"></button>
+    <button id="play" onclick="vidplay()">&gt;</button>
+    <button id="fastFwd" class="fa fa-fast-forward" onclick="skip(10)"></button>
+</div>         
+
+
+					</p>
 					<p></p>
 				</article>
 			</div>
