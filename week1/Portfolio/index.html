@@ -11,29 +11,10 @@
 <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-function vidplay() {
-       var video = document.getElementById("Video1");
-       var button = document.getElementById("play");
-       if (video.paused) {
-          video.play();
-          button.textContent = "||";
-       } else {
-          video.pause();
-          button.textContent = ">";
-       }
-    }
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    function restart() {
-        var video = document.getElementById("Video1");
-        video.currentTime = 0;
-    }
-
-    function skip(value) {
-        var video = document.getElementById("Video1");
-        video.currentTime += value;
-    }      
-</script>
 
 </head>
 <body id="top">
@@ -57,16 +38,37 @@ function vidplay() {
 				</li>
 				<li>E: satyasoft515@gmail.com</li>
 				<li>m: +91 9908 085 424</li>
-				<li><button type="button" class="btn btn-success btn-sm">Home</button>
-				<button type="button" class="btn btn-success btn-sm">Profile</button>
-				<button type="button" class="btn btn-success btn-sm">Projects</button>
-				<button type="button" class="btn btn-success btn-sm">Contact Us</button>
-				</li>
-			</ul>
+
+				</ul>
 
 		</div>
 		<div class="clear"></div>
 	</div>
+		<div id="contactDetails" class="quickFade delayFour">
+		<!--<ul> 
+            <li><button type="button" class="btn btn-success btn-sm">Home</button>
+				<button type="button" class="btn btn-success btn-sm">Profile</button>
+				<button type="button" class="btn btn-success btn-sm">Projects</button>
+				<button type="button" class="btn btn-success btn-sm">Contact Us</button>
+				</li>
+		</ul>-->
+		<nav class="navbar navbar-default" style="background-color: #5f6063;" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>    
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+    <li class="navbar-right"><a href="#"><button type="button" class="btn btn-success btn-sm">Contact Us</button></a></li>
+      <li class="navbar-right"><a href="#"><button type="button" class="btn btn-success btn-sm">Profile</button></a></li>
+      <li class="navbar-right"><a href="#"><button type="button" class="btn btn-success btn-sm">Home</button></a></li>
+    </ul>
+    </div>
+    </nav>
+</div>
 	
 	<div id="mainArea" class="quickFade delayFive">
 		<section>
@@ -148,20 +150,14 @@ function vidplay() {
 				<article>
 					<h2></h2>
 					<p class="subDetails">
-	 <!--<video id="Video1" width="200px" height="100px">
-     <source src="1.mp4" type="video/mp4" />
-     <source src="1.mp4" type="video/mp4" />
-     <a href="1.mp4">Download the video</a> file. 
-     </video>
-  
-<div id="buttonbar">
-    <button id="restart" class="fa fa-fast-stop" onclick="restart();">[]</button> 
-    <button id="rew" class="fa fa-fast-backward" onclick="skip(-10)"></button>
-    <button id="play" class="fa fa-play-circle" onclick="vidplay()"></button>
-    <button id="fastFwd" class="fa fa-fast-forward" onclick="skip(10)"></button>
-</div>   -->
-               <a class="youtube" href="http://youtube.com/watch?v=5SKmMxrNNHk" target="_blank">
+	           <a class="video" href="http://youtube.com/watch?v=5SKmMxrNNHk" target="_blank">
                  <img src="http://i3.ytimg.com/vi/5SKmMxrNNHk/default.jpg" alt="{ Python }" />
+              </a>
+                <a class="video" href="http://youtube.com/watch?v=etd5ZDMTdpU" target="_blank">
+                 <img src="http://i3.ytimg.com/vi/etd5ZDMTdpU/default.jpg" alt="{ Python }" />
+              </a>
+                <a class="video" href="http://youtube.com/watch?v=hHzPVasE3TM" target="_blank">
+                 <img src="http://i3.ytimg.com/vi/hHzPVasE3TM/default.jpg" alt="{ Python }" />
               </a>
 
 
@@ -196,6 +192,41 @@ function vidplay() {
 			</div>
 			<div class="clear"></div>
 		</section>
+		<section>
+			<div class="sectionTitle">
+				<h1>Contact</h1>
+			</div>
+			
+			<div class="sectionContent">
+				<article>
+					<h2><u>Feedback Here</u></h2>
+					<p class="subDetails">
+						<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Name</label>
+    <input type="name" name="name"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+     </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    
+  </div>
+  <div class="form-group">
+    <label for="exampleTextarea">Message</label>
+    <textarea class="form-control" name="message" id="exampleTextarea" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+					</p>
+					<p></p>
+				</article>
+				
+				
+			</div>
+			<div class="clear"></div>
+		</section>
+		
 		
 	</div>
 </div>
