@@ -55,9 +55,9 @@
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-    <li class="navbar-right"><a href="#"><button type="button" class="btn btn-success btn-sm">Contact Us</button></a></li>
-      <li class="navbar-right"><a href="#"><button type="button" class="btn btn-success btn-sm">Profile</button></a></li>
-      <li class="navbar-right"><a href="#"><button type="button" class="btn btn-success btn-sm">Home</button></a></li>
+    <li class="navbar-right"><a href="#"><button type="button" class="btn btn-info btn-md">Contact Us</button></a></li>
+      <li class="navbar-right"><a href="#"><button type="button" class="btn btn-info btn-md">Profile</button></a></li>
+      <li class="navbar-right"><a href="#"><button type="button" class="btn btn-info btn-md">Home</button></a></li>
     </ul>
     </div>
     </nav>
@@ -145,8 +145,8 @@
 				<article>
 					<h2></h2>
 					<p class="subDetails">
-	           <a class="video" href="http://youtube.com/watch?v=5SKmMxrNNHk" target="_blank">
-                 <img src="http://i3.ytimg.com/vi/5SKmMxrNNHk/default.jpg" alt="{ Python }" />
+	           <a class="video" href="http://youtube.com/watch?v=yKAtr65aBjo" target="_blank">
+                 <img src="http://i3.ytimg.com/vi/yKAtr65aBjo/default.jpg" alt="{ Python }" />
               </a>
                 <a class="video" href="http://youtube.com/watch?v=etd5ZDMTdpU" target="_blank">
                  <img src="http://i3.ytimg.com/vi/etd5ZDMTdpU/default.jpg" alt="{ Python }" />
@@ -194,24 +194,39 @@
 			
 			<div class="sectionContent">
 				<article>
-					<h2><u>Feedback Here</u></h2>
+					<h2><u></u></h2>
 					<p class="subDetails">
-						<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Name</label>
-    <input type="name" name="name"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-     </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    
-  </div>
-  <div class="form-group">
-    <label for="exampleTextarea">Message</label>
-    <textarea class="form-control" name="message" id="exampleTextarea" rows="3"></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <form  action="index.php" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="action" value="submit">
+    Your name:<br>
+    <input name="name" type="text" value="" size="30"/><br>
+    Your email:<br>
+    <input name="email" type="text" value="" size="30"/><br>
+    Your message:<br>
+    <textarea name="message" rows="7" cols="30"></textarea><br>
+    <input type="submit" name="submit" value="Send email"/>
+    </form>
+    <?php
+    if(isset($_POST['submit']))
+    {
+    $name=$_REQUEST['name'];
+    $email=$_REQUEST['email'];
+    $message=$_REQUEST['message'];
+    if (($name=="")||($email=="")||($message==""))
+        {
+		echo "All fields are required, please fill <a href=\"\">the form</a> again.";
+	    }
+    else{		
+	    $from="From: $name<$email>\r\nReturn-path: $email";
+        $subject="Message sent using your Portfolio form";
+		$res=mail("murthy.veeranna@adaptavantcloud.com", $subject, $message, $from);
+		if(res)
+			 echo "mail Sent";
+		else
+			echo "Failed";
+	    }
+	 }  
+?>
 
 					</p>
 					<p></p>
