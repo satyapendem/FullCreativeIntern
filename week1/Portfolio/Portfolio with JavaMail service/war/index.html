@@ -23,24 +23,7 @@ section {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
-<script>
-$(document).ready(function(){
-  
-  $("a").on('click', function(event) {
-      if (this.hash !== "") {
-      
-      event.preventDefault();
-      var hash = this.hash;
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function(){
-   
-      window.location.hash = hash;
-      });
-    } 
-  });
-});
-</script>
+
 
 </head>
 <body id="top">
@@ -213,14 +196,24 @@ $(document).ready(function(){
 				<article>
 					<h2><u></u></h2>
 					<p class="subDetails">
-    <form  action="satya" method="POST">
+    <form  action="satya" name="Form" method="POST" onsubmit="return validateForm();">
     <input type="hidden" name="action" value="submit">
-    Your name:<br>
-    <input name="name" type="text" value="" size="30"/><br>
-    Your email:<br>
-    <input name="email" type="text" value="" size="30"/><br>
+    Your name:<font color="red">*</font><br>
+    <input name="name" type="text"  value="" size="30"/>
+    <div id="message">
+    </div>
+    <br>
+    Your email:<font color="red">*</font><br>
+    <input name="email" type="text" value="" size="30"/>
+    <div id="message1">
+    </div>
+    <br>
     Your message:<br>
-    <textarea name="message" rows="7" cols="30"></textarea><br>
+    <textarea name="message" id="textarea" rows="7" cols="30" maxlength="150" onkeyup="counter(this);"></textarea>
+    <div id="textarea_feedback"></div>
+    
+    <br>
+    
     <input type="submit" name="submit" value="Send email"/>
     </form>
 
@@ -237,5 +230,86 @@ $(document).ready(function(){
 	</div>
 	
 </div>
+<script>
+$(document).ready(function(){
+  
+  $("a").on('click', function(event) {
+      if (this.hash !== "") {
+      
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+      window.location.hash = hash;
+      });
+    } 
+  });
+});
+$(document).ready(function() {
+	var text_max = 150;
+	$('#textarea_feedback').html(text_max + ' characters remaining');
+
+	$('#textarea').keyup(function() {
+	    var text_length = $('#textarea').val().length;
+	    var text_remaining = text_max - text_length;
+
+	    $('#textarea_feedback').html(text_remaining + ' characters remaining');
+	});
+
+	});
+</script>
+<script>
+function validateForm() {
+    var mail = document.forms["Form"]["email"].value;
+    var name = document.forms["Form"]["name"].value;
+    
+    var isValid= true;
+    textarea.addEventListener("keypress", textareaLengthCheck(textarea), false);
+     });
+     
+    if(name=='')
+    	{
+    	document.getElementById('message').style.visibility="visible";
+        document.getElementById('message').innerHTML="<font color='red'>Enter Name</font>";
+        return false;
+        isValid =  false;    	
+    	}
+    else
+	{
+	document.getElementById('message').style.visibility="hidden";
+	}
+    if(mail=='')
+	{
+	document.getElementById('message1').style.visibility="visible";
+    document.getElementById('message1').innerHTML="<font color='red'>Enter email</font>";
+    return false;
+    isValid =  false;    	
+	}
+else
+{
+document.getElementById('message1').style.visibility="hidden";
+}
+
+    var atpos = mail.indexOf("@");
+    var dotpos = mail.lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=mail.length) {
+    	document.getElementById('message1').style.visibility="visible";
+        document.getElementById('message1').innerHTML="<font color='red'>Enter a Valid email</font>";
+        return false;
+        isValid =  false;
+    }
+    else
+    	{
+    	document.getElementById('message1').style.visibility="hidden";
+    	}
+    
+    
+}
+
+</script>
+
+
 </body>
 </html>
