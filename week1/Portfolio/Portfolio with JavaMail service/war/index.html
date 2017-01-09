@@ -209,8 +209,8 @@ section {
     </div>
     <br>
     Your message:<br>
-    <textarea name="message" id="textarea" rows="7" cols="30" maxlength="150" onkeyup="counter(this);"></textarea>
-    <div id="textarea_feedback"></div>
+    <textarea name="message" id="msg" rows="7" cols="30" maxlength="150" onkeyup="counter(this);"></textarea>
+    <div id="counter_div">0/150</div>
     
     <br>
     
@@ -247,28 +247,12 @@ $(document).ready(function(){
     } 
   });
 });
-$(document).ready(function() {
-	var text_max = 150;
-	$('#textarea_feedback').html(text_max + ' characters remaining');
-
-	$('#textarea').keyup(function() {
-	    var text_length = $('#textarea').val().length;
-	    var text_remaining = text_max - text_length;
-
-	    $('#textarea_feedback').html(text_remaining + ' characters remaining');
-	});
-
-	});
 </script>
 <script>
 function validateForm() {
     var mail = document.forms["Form"]["email"].value;
     var name = document.forms["Form"]["name"].value;
-    
     var isValid= true;
-    textarea.addEventListener("keypress", textareaLengthCheck(textarea), false);
-     });
-     
     if(name=='')
     	{
     	document.getElementById('message').style.visibility="visible";
@@ -307,7 +291,9 @@ document.getElementById('message1').style.visibility="hidden";
     
     
 }
-
+function counter(msg){
+    document.getElementById('counter_div').innerHTML = msg.value.length+'/150';
+}
 </script>
 
 
