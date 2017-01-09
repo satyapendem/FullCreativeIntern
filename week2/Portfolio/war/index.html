@@ -196,21 +196,21 @@ section {
 				<article>
 					<h2><u></u></h2>
 					<p class="subDetails">
-    <form  action="satya" name="Form" method="POST" onsubmit="return validateForm();">
+    <form  action="satya" id="Form" method="POST" novalidate>
     <input type="hidden" name="action" value="submit">
     Your name:<font color="red">*</font><br>
-    <input name="name" type="text"  value="" size="30"/>
+    <input name="name" type="text"  value="" size="30" required="true"/>
     <div id="message">
     </div>
     <br>
     Your email:<font color="red">*</font><br>
-    <input name="email" type="text" value="" size="30"/>
+    <input name="email" type="email" value="" size="30" required="true"/>
     <div id="message1">
     </div>
     <br>
     Your message:<br>
-    <textarea name="message" id="msg" rows="7" cols="30" maxlength="150" onkeyup="counter(this);"></textarea>
-    <div id="counter_div">0/150</div>
+    <textarea name="message" id="msg" rows="7" cols="30" maxlength="150" onkeyup="countChar(this);"></textarea><br>
+    <span id="textarea_feedback">150 Characters Remaining</span>
     
     <br>
     
@@ -230,71 +230,7 @@ section {
 	</div>
 	
 </div>
-<script>
-$(document).ready(function(){
-  
-  $("a").on('click', function(event) {
-      if (this.hash !== "") {
-      
-      event.preventDefault();
-      var hash = this.hash;
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function(){
-   
-      window.location.hash = hash;
-      });
-    } 
-  });
-});
-</script>
-<script>
-function validateForm() {
-    var mail = document.forms["Form"]["email"].value;
-    var name = document.forms["Form"]["name"].value;
-    var isValid= true;
-    if(name=='')
-    	{
-    	document.getElementById('message').style.visibility="visible";
-        document.getElementById('message').innerHTML="<font color='red'>Enter Name</font>";
-        return false;
-        isValid =  false;    	
-    	}
-    else
-	{
-	document.getElementById('message').style.visibility="hidden";
-	}
-    if(mail=='')
-	{
-	document.getElementById('message1').style.visibility="visible";
-    document.getElementById('message1').innerHTML="<font color='red'>Enter email</font>";
-    return false;
-    isValid =  false;    	
-	}
-else
-{
-document.getElementById('message1').style.visibility="hidden";
-}
-
-    var atpos = mail.indexOf("@");
-    var dotpos = mail.lastIndexOf(".");
-    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=mail.length) {
-    	document.getElementById('message1').style.visibility="visible";
-        document.getElementById('message1').innerHTML="<font color='red'>Enter a Valid email</font>";
-        return false;
-        isValid =  false;
-    }
-    else
-    	{
-    	document.getElementById('message1').style.visibility="hidden";
-    	}
-    
-    
-}
-function counter(msg){
-    document.getElementById('counter_div').innerHTML = msg.value.length+'/150';
-}
-</script>
+<script src="script.js"></script>
 
 
 </body>
