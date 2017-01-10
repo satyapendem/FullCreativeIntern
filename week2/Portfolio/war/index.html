@@ -3,12 +3,7 @@
 <head>
 <title>Satya Pendem</title>
 <style>
-body, html, .main {
-    height: 100%;
-}
-section {
-    min-height: 100%;
-}
+
 </style>
 
 <meta name="viewport" content="width=device-width"/>
@@ -199,7 +194,7 @@ section {
     <form  action="satya" id="Form" method="POST" novalidate>
     <input type="hidden" name="action" value="submit">
     Your name:<font color="red">*</font><br>
-    <input name="name" type="text"  value="" size="30" required="true"/>
+    <input name="name" type="text"  value="" size="30" required="true"/><br>
     <div id="message">
     </div>
     <br>
@@ -209,8 +204,10 @@ section {
     </div>
     <br>
     Your message:<br>
-    <textarea name="message" id="msg" rows="7" cols="30" maxlength="150" onkeyup="countChar(this);"></textarea><br>
-    <span id="textarea_feedback">150 Characters Remaining</span>
+    <textarea name="message" id="msg" rows="7" cols="30" maxlength="150" required="true" onkeyup="textCounter(this,'counter',150);"></textarea>
+    <br>
+    <span id='remainingC'></span>
+    
     
     <br>
     
@@ -226,7 +223,7 @@ section {
 			<div class="clear"></div>
 		</section>
 		
-		
+		<a href="#" id="back-to-top" title="Back to top">&uarr;</a>
 	</div>
 	
 </div>

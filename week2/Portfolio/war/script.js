@@ -45,14 +45,32 @@ $(document).ready( function()
 
 	});
 
-function countChar(val) {
-	  var len = val.value.length;
-	  var text_max = 150;
+$('textarea').keypress(function(){
 
-	  if (len >= text_max) {
-	    val.value = val.value.substring(0, text_max);
-	    $('#textarea_feedback').text(((text_max - len) + 1) + ' characters remaining - out of limit');
-	  } else {
-	    $('#textarea_feedback').text((text_max - len) + ' characters remaining');
-	  }
-	};
+    if(this.value.length > 150){
+        return false;
+    }
+    $("#remainingC").html("Remaining characters : " +(150 - this.value.length));
+});
+
+if ($('#back-to-top').length) {
+    var scrollTrigger = 100, 
+        backToTop = function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > scrollTrigger) {
+                $('#back-to-top').addClass('show');
+            } else {
+                $('#back-to-top').removeClass('show');
+            }
+        };
+    backToTop();
+    $(window).on('scroll', function () {
+        backToTop();
+    });
+    $('#back-to-top').on('click', function (e) {
+        e.preventDefault();
+        $('html,body').animate({
+            scrollTop: 0
+        }, 700);
+    });
+}
