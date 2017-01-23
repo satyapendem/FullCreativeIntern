@@ -1,27 +1,32 @@
 package com.example.myproject;
 
-public class Values { 
+import java.io.Serializable;
+
+public class Values implements Serializable { 
 		 
 		   private String name;
-		    /* Class fields */
+		  
 		    private String email;
 		 
 		    private String message;
 		 
 		   
-		    /* Getter and Setter methods */
+		    
 		    public String getName() {
 		        return name;
 		    }
 		 
-		    public void setName(String username) {
-		        this.name = username;
+		    public void setName(String name) {
+		        this.name = name;
 		    }
 		 
 		    public String getEmail() {
 		        return email;
 		    }
-		    
+		    public void setEmail(String email)
+		    {
+		    	this.email=email;
+		    }
 		    public void setMessage(String message) {
 		        this.message= message;
 		    }

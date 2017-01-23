@@ -1,5 +1,10 @@
 package com.example.myproject;
+
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,14 +22,14 @@ public class Portfolio_mailapiServlet {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	@RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST, headers = {"content-type=application/json"})
+	@RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	String sendEmail(@ModelAttribute("Values") Values user) throws Exception,MailException {
+	String sendEmail(@ModelAttribute("v") Values v) throws Exception,MailException {
  
 		 String res;
-		String name=user.getName();
-   		String mail=user.getEmail();
-   		String message = user.getMessage();
+		String name=v.getName();
+   		String mail=v.getEmail();
+   		String message = v.getMessage();
    		System.out.println(name);
 		if(name==null && mail==null && message==null)
 		{

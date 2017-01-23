@@ -246,10 +246,10 @@
 				<article>
 					<h2><u></u></h2>
 					<p class="subDetails">
-    <form  id="userForm"  metod="POST" accept="application/json"  novalidate>
+    <form  id="userForm"    accept="application/json"  novalidate>
     <div class="form-group">
 
-    <input type="hidden" name="action" value="submit">
+   
     <label for="exampleInputEmail1">Name</label><font color="red">*</font>
     <input name="name"  type="text" class="form-control" value="" size="30" required="true"/>
     <div id="message">
@@ -268,7 +268,7 @@
     
     <br>
     
-    <button type="submit" name="submit"  class="btn btn-primary" >SendMail</button>
+    <button type="button"   class="btn btn-primary" >SendMail</button>
     <div id="result"></div>
     </div>
     </form>

@@ -17,7 +17,7 @@ $(document).ready(function(){
 $(document).ready( function()
 
 	    {
-	    $( "#userForm" ).submit(function( event ){        
+	$(document).on('click','button',function(event){       
 	        var proceed = true;
 	        $("#userForm input[required=true], #userForm textarea[required=true]").each(function(){
 	                $(this).css('border-color',''); 
@@ -74,23 +74,21 @@ if ($('#back-to-top').length) {
         }, 700);
     });
 }
-
-$(document).on('click','button', function(e) { 
-    var frm = $("#userForm");
-   var dat = JSON.stringify(frm.serializeArray()); 
-
-$.ajax({ 
-     type: 'POST', 
-     url: '/sendEmail.do', 
-     data: dat,
-     contentType: 'application/json',
-     dataType: 'json',
-     error: function() {
-        $("#result").innerhtml("haiii");
-     },
-     success: function(hxr) { 
-         alert("Success: " + xhr); 
-     }
-  }); 
-}
-)
+$(document).on('click','button', function(e){
+$.ajax({
+    type:"post",
+     data : $("#userForm").serialize(),
+    url:"/sendEmail.do",
+    async: false,
+    dataType: "json",
+    success: function(response){
+    	
+    	$("#result").html(response);
+      
+    },
+    error: function(xhr, resp, text) {
+        console.log(xhr, resp, text);
+       
+    }
+});
+});
