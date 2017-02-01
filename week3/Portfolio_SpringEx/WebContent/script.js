@@ -74,16 +74,16 @@ if ($('#back-to-top').length) {
         }, 700);
     });
 }
+
 $(document).on('click','button', function(e){
 $.ajax({
     type:"post",
      data : $("#userForm").serialize(),
     url:"/sendEmail.do",
-    async: false,
-    dataType: "json",
     success: function(response){
     	
     	$("#result").html(response);
+    	$("#result").show();
       
     },
     error: function(xhr, resp, text) {

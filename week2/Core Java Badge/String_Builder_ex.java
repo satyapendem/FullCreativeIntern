@@ -10,7 +10,7 @@ public class String_Builder_ex{
         System.out.println("Time taken by StringBuffer: " + (System.currentTimeMillis() - startTime) + "ms");  
         startTime = System.currentTimeMillis();  
         StringBuilder sb2 = new StringBuilder("satya");  
-        for (int i=0; i<100; i++){  
+        for (int i=0; i<10000; i++){  
             sb2.append("murthy");  
         }  
         System.out.println("Time taken by StringBuilder: " + (System.currentTimeMillis() - startTime) + "ms");  

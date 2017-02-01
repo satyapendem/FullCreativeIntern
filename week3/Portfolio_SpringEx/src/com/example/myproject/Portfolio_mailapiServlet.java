@@ -22,7 +22,7 @@ public class Portfolio_mailapiServlet {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	@RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST)
 	public @ResponseBody
 	String sendEmail(@ModelAttribute("v") Values v) throws Exception,MailException {
  
