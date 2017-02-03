@@ -1,0 +1,8 @@
+1. Html and Css core
+2. Pratice Data Structures
+3. Pratice Exception Handling.
+4. Stack Overflow
+5. Mini Project In java(portfolio)
+6. Introducction to GAE.
+7. How to use Git and GitHub.
+8. Linux Commandline Basics.
