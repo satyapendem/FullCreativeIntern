@@ -11,3 +11,4 @@
 10. Chat App with Channnel Api and Java and javascript.
 11. Image Upload to BlobStore.
 12. Mail Api Java Servlets.
+13. Working with JavaScript Patterns.
