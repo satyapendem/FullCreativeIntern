@@ -12,3 +12,6 @@
 11. Image Upload to BlobStore.
 12. Mail Api Java Servlets.
 13. Working with JavaScript Patterns.
+14. Maven Project was successfully deployed to GAE and added in Week6.
+15. Javascript and Jquery Examples were added.
+16. Javascript Design Patterns examples were added.
