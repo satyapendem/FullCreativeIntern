@@ -13,3 +13,4 @@ var myCar = {
 };
 var yourCar = Object.create( myCar );
 console.log( yourCar.name );
+
