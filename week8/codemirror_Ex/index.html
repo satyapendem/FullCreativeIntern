@@ -4,62 +4,101 @@
 <head>
   <meta charset="utf-8">
   <title>Demo_Format</title>
-  <link rel="stylesheet" href="codemirror/lib/codemirror.css">
-  <script src="codemirror/lib/codemirror.js"></script>
-  <script src="codemirror/lib/util/formatting.js"></script>
-  <script src="codemirror/mode/css/css.js"></script>
-  <script src="codemirror/mode/xml/xml.js"></script>
-  <script src="codemirror/mode/javascript/javascript.js"></script>
-  <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
-  <link rel="stylesheet" href="codemirror/doc/docs.css">
-
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <script src="lib/codemirror.js"></script>
+  <script src="lib/util/formatting.js"></script>
+  <script src="lib/css.js"></script>
+  <script src="lib/xml.js"></script>
+  <script src="lib/javascript.js"></script>
+  <script src="lib/htmlmixed.js"></script>
+  <link rel="stylesheet" href="lib/docs.css">
   <style type="text/css">
     .CodeMirror {
       border: 1px solid #eee;
+      height: auto!important;
     }
     td {
       padding-right: 20px;
+    }
+    .code {
+      margin: 10px 0;
+    }
+
+    .inline {
+      display: inline-block;
+      margin: 0;
     }
   </style>
 </head>
 <body>
   <h1></h1>
 
-  <form><textarea id="code" name="code"><script> function (s,e){ for(var i=0; i < 1; i++) test("test();a=1");} </script>
-    <script>
-      function test(c){  for (var i = 0; i < 10; i++){	          process("a.b();c = null;", 300);}
-    }
-  </script>
-  <table><tr><td>test 1</td></tr><tr><td>test 2</td></tr></table>
-  <script> function test() { return 1;} </script>
-  <style> .test { font-size: medium; font-family: monospace; }
-  </style></textarea></form>
-  <table>
-    <tr>
-      <td>
-        <a href="javascript:autoFormatSelection()">
-         <button> Format </button>
-       </a>
-     </td>
-     
-   </tr>
- </table>
-</p>    
-<script>
-  
-  
-  
+  <form><textarea id="code" name="code">
   CodeMirror.commands["selectAll"](editor);
   function getSelectedRange() {
     return { from: editor.getCursor(true), to: editor.getCursor(false) };
   }
-  
   function autoFormatSelection() {
     var range = getSelectedRange();
     var x=editor.autoFormatRange(range.from, range.to);
-
   }
-  
+ </textarea>
+
+</form>
+
+<table>
+  <tr>
+    <td>
+      <a href="javascript:autoFormatSelection()">
+       <button> Format </button></a>&nbsp;&nbsp;&nbsp;
+       <button id="copy_button">copy</button>
+       <button id="show">show</button>
+     </td>
+     <div id="code_show" name="code" class="code">
+
+     </div>
+   </tr>
+ </table>
+</p>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    //copy button click function
+    $("#copy_button").click(function(){
+      $("textarea").select();
+      document.execCommand('copy');
+    });
+  //Default Syntax Highlight 
+  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: false,
+    indentUnit: 4
+  });
+  CodeMirror.commands["selectAll"](editor);
+  function getSelectedRange() {
+    return { from: editor.getCursor(true), to: editor.getCursor(false) };
+  }
+  function autoFormatSelection() {
+    var range = getSelectedRange();
+    var x=editor.autoFormatRange(range.from, range.to);
+  }
+  //Show Code in DIV
+  $("#code_show").hide();
+  var program=editor.getValue();
+  $("#code_show").text(program);
+  //Click Function to show code with Systex Highlight
+  $("#show").click(function(){
+    $("#code_show").show();
+    $('.code').each(function() {
+      var $this = $(this),
+      $code = $this.html(),
+      $unescaped = $('<div/>').html($code).text();
+      $this.empty();
+      CodeMirror(this, {
+        value: $unescaped,
+        readOnly: "nocursor"
+      });   
+    });
+
+  });
 </script>
 
 </body>
