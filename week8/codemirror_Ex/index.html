@@ -34,14 +34,7 @@
   <h1></h1>
 
   <form><textarea id="code" name="code">
-  CodeMirror.commands["selectAll"](editor);
-  function getSelectedRange() {
-    return { from: editor.getCursor(true), to: editor.getCursor(false) };
-  }
-  function autoFormatSelection() {
-    var range = getSelectedRange();
-    var x=editor.autoFormatRange(range.from, range.to);
-  }
+  
  </textarea>
 
 </form>
@@ -82,8 +75,14 @@
   }
   //Show Code in DIV
   $("#code_show").hide();
-  var program=editor.getValue();
-  $("#code_show").text(program);
+  $(document).ready(function(){
+        $('#code').bind('input propertychange', function() {
+          var program =this.value;
+          $("#code_show").text(program);
+        });
+      });
+  //var program=editor.getValue();
+  
   //Click Function to show code with Systex Highlight
   $("#show").click(function(){
     $("#code_show").show();
