@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head><body>
+	<div class="container">
+		<div class="col-xs-8">
+			<h1><i class="fa fa-group" style="color: #aaa;"></i>Chat application <span class="btn btn-default btn-xs" id="change-name"><i class="fa fa-user"></i> Change name</span></h1>
+			<div class="well" id="messages" style="height:200px;overflow-y:scroll;">
+			Loading
+			</div>
+			
+		    <div class="input-group">
+		      <input type="text" class="form-control" id="message">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button" id="send-message"><i class="fa fa-bullhorn"></i></button>
+		      </span>
+		    </div>
+		</div>
+		<div class="col-xs-4">
+			<div class="panel panel-default" style="margin-top:70px;">
+			  <div class="panel-heading"><i class="fa fa-group"></i> Active users</div>
+			  <div class="panel-body">
+			    <ul class="fa-ul" id="users-list">
+			    	<i class="fa fa-refresh fa-spin fa-fw"></i> Plz Wait...
+			    </ul>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<script>
+		setInterval(function(){
+			$('#users-list').load('Users');
+			$('#messages').load('GetMessage', function(){
+				$('#messages').scrollTop(9999999);
+			});
+		}, 1000);
+		
+		$('#change-name').click(function(){
+			$.post('SetName', 
+					{
+						username: prompt('Your new name?')
+						
+					}
+			);
+		});
+		
+		$('#message').keydown(function(event){
+			if(event.keyCode == 13){
+				sendMessage();
+			}
+		});
+		
+		$('#send-message').click(sendMessage);
+		
+		function sendMessage(){
+			$.post('PostMessage', {message: $('#message').val()}, function(){
+				$('#message').val("");
+			});
+		}
+	</script>
+</body></html>
