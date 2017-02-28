@@ -14,4 +14,5 @@
 13. Working with JavaScript Patterns.
 14. Maven Project was successfully deployed to GAE and added in Week6.
 15. Javascript and Jquery Examples were added.
+16. Code Beautifer and Code mirror example were added.
 
