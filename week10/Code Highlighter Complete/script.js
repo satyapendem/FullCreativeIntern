@@ -12,6 +12,7 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
   lineNumbers: false,
   highlightMatches: true,
   stylesheet: "lib/jscolors.css",
+  autofocus: true,
   indentUnit: 4
 });
 editor1.focus();
@@ -113,7 +114,8 @@ editor1.setSize(560, 200);
        });
         });
      $(document).on('click','.save',function(){
-      down_div=$(for_update).find('div.CodeMirror-code');
+      for_down=$(this).parents(".code");
+      down_div=$(for_down).find('div.CodeMirror-code');
       down_code = $(down_div).clone();
       console.log(down_code);
       content_code = $(down_code).find('div.CodeMirror-linenumber').remove();
