@@ -15,10 +15,12 @@
   <script src="lib/htmlmixed.js"></script>
   <link rel="stylesheet" href="lib/docs.css">
   <script type="text/javascript">
-    
+
   </script>
   <style type="text/css">
-    
+  div.CodeMirror-cursorsVisible {
+	visibility: visible !important;
+   }
     .bs-example{
     	margin: 20px;
     }
@@ -31,11 +33,11 @@
     }
     .code {
       margin: 10px 0;
-      
+
     }
     .code.icons {
       margin: 10px 0;
-      
+
     }
 
     .inline {
@@ -55,13 +57,13 @@
   <div class="bs-example">
     <!-- Button HTML (to Trigger Modal) -->
     <a href="#myModal" id="codesnippet" data-toggle="modal"><img src="coding.png" height="35" /></a>
-    
+
     <div id="code_show" class="code"></div>
     <div  class="pre_icons" style="display:none">
        <button class="save"  style="background-color:transparent; border-color:transparent;" name=""><img src="down.png" height="25" /></button>
-       <button class="edit"  style="background-color:transparent; border-color:transparent;" name=""><img src="edit.png" height="25" /></button>  
+       <button class="edit"  style="background-color:transparent; border-color:transparent;" name=""><img src="edit.png" height="25" /></button>
    </div>
-   
+
    <!-- Modal HTML -->
    <div id="myModal" class="modal fade">
     <div class="modal-dialog">
@@ -139,6 +141,6 @@
   </div>
 </div>
 <script src="script.js">
-</script>     
+</script>
 </body>
-</html>                                		
+</html>

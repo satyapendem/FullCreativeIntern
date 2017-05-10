@@ -24,7 +24,7 @@ editor1.setSize(560, 200);
    //$("#save").hide();
    //$("#edit").hide();
    // $('#buttons').hide();
-  
+
    $(document).on('mouseenter', '.code', function () {
     $(this).find(".pre_icons").show();
   });
@@ -36,13 +36,13 @@ editor1.setSize(560, 200);
      //$("#save").show();
      //$("#edit").show();
      // $('#buttons').show();
-
+      editor.setValue("");
      var program=editor.getValue();
      var code_div = $(".code");
      var icon = $("#buttons");
      if($(code_div).children().length<1){
       $(code_div).append(program);
-      console.log("if");
+      console.log("append");
     }
     else{
       code_div = document.createElement('div');
@@ -52,10 +52,10 @@ editor1.setSize(560, 200);
       //debugger;
       $(".code").last().after(code_div);
       // $("#"+ids).append(new_ele);
-      console.log("else");
+      console.log("create new div");
     }
     $(code_div).each(function() {
-      
+
       var $this = $(this),
       $code = $this.html(),
       $unescaped = $('<div/>').html($code).text();
@@ -65,15 +65,16 @@ editor1.setSize(560, 200);
         lineNumbers: true,
         theme: "neo",
         readOnly: "nocursor"
-      });   
+      });
     });
 
     new_ele = $('.pre_icons').clone();
      //new_ele.removeAttr('id');
      $(code_div).append(new_ele);
+
      /*Click events for edit and download*/
-   });  
-     
+   });
+
      $(document).on('click','.edit', function(event){
       $('#edit_modal').modal('show');
       editor1.setValue("");
@@ -81,11 +82,12 @@ editor1.setSize(560, 200);
        edit_div=$(for_update).find('div.CodeMirror-code');
        edit_code = $(edit_div).clone();
         document.getElementById("Up_fileName").value=file_name;
-       content_code = $(edit_code).find('div.CodeMirror-linenumber').remove();
+       //content_code = $(edit_code).find('div.CodeMirror-linenumber').remove();
        txt_for_update=$(edit_code).text();
        console.log(txt_for_update);
        editor1.setValue("");
        editor1.setValue(txt_for_update);
+
       });
       $('#update_code').click(function(){
         $('#edit_modal').modal('hide');
@@ -95,9 +97,9 @@ editor1.setSize(560, 200);
         $(for_update).find('.CodeMirror').remove();
         update_div = document.createElement('div');
         update_div.innerHTML = updated_text;
-        
+
          //for_update = $(edit_div).parents().find('.code');
-         $(for_update).prepend(update_div);        
+         $(for_update).prepend(update_div);
         //$(edit_div).html(updated_text);
            //$(code_div).innerHTML(txt_for_update);
            $(update_div).each(function() {
@@ -110,9 +112,9 @@ editor1.setSize(560, 200);
           lineNumbers: true,
           theme: "neo",
           readOnly: "nocursor"
-        });   
-       });
         });
+       });
+    });
      $(document).on('click','.save',function(){
       for_down=$(this).parents(".code");
       down_div=$(for_down).find('div.CodeMirror-code');
@@ -121,7 +123,7 @@ editor1.setSize(560, 200);
       content_code = $(down_code).find('div.CodeMirror-linenumber').remove();
       txt_for_down=$(down_code).text();
       console.log(txt_for_down);
-      var type=document.getElementById('language');
+      type=document.getElementById('language');
       type=type.options[type.selectedIndex].value;
       file_name=document.getElementById('fileName').value;
       console.log(file_name);
@@ -141,9 +143,9 @@ editor1.setSize(560, 200);
         case "php": saveTextAsFile(file_para,"php");
         break;
         case "markdown": saveTextAsFile(file_para,"md");
-        break      
+        break
         case "plaintext": saveTextAsFile(file_para,"txt");
-        break      
+        break
 
       }
       function saveTextAsFile(file,type){
@@ -167,8 +169,3 @@ editor1.setSize(560, 200);
         downloadLink.click();
        }
      });
-   
-
-   
-
-

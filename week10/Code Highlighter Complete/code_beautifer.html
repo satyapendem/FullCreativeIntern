@@ -12,6 +12,7 @@
      resize: none;
    }
  </style>
+   <link rel="stylesheet" href="lib/neo.css">
 </head>
 <body>
 
@@ -24,7 +25,7 @@
 
 
         <label for="comment"><h3>Paste your code Here:</h3></label>
-        
+
         <textarea class="form-control" id="code" rows="6"></textarea><br>
         <button type="button" id="convert" class="btn btn-primary">Submit</button>
 
@@ -41,7 +42,7 @@
       </div>
 
     </div>
-    
+
     <script src="lib/codebeautifier.js"></script>
      <script src="lib/codemirror.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -51,32 +52,19 @@
       var copyBtn = document.querySelector('#codecp');
       copyBtn.addEventListener('click', function () {
        var urlField = document.querySelector('#show');
-
        urlField.select();
-
      document.execCommand('copy'); // or 'cut'
    }, false);
-      
+
       $(function(){
         $("#box").hide();
         $("#convert").on("click", function(){
           var program = $("textarea#code").val();
-          var regex_html = /<\/?[\w\s="/.':;#-\/\?]+>/gi;
-          var regex_css  = /{([^}]*)}/gm;
-
-          if(regex_html.test(program)==true){
-            Html(program);
-            console.log(program);
-          }
-          else if(regex_css.test(program)==true)
-          {
-            console.log(program);
-            CSS(program);
-          }
-          else{
+          var code_div=$("#show");
+              console.log("else block");
             $("#box").show();
-            $("#show").html(program);
-            $("#show").each(function() {
+            $("#show").append(program);
+            $(code_div).each(function() {
               var $this = $(this),
               $code = $this.html(),
               $unescaped = $('<div/>').html($code).text();
@@ -85,52 +73,13 @@
                 value: $unescaped,
                 lineNumbers: true,
                 highlightMatches: true,
+                theme: "neo",
                 readOnly: "nocursor"
-              });   
+              });
             });
-          }
        });
-      })
-      function CSS(program)
-      {
-        $("#box").show();
-        codebeautifier({
-          element: document.getElementById('show'),
-          type: 'css',
-          text: program,
-          readOnly: "nocursor"
-        });
-      }
-      function JavaScrit(program)
-      {
-        $("#box").show();
-        codebeautifier({
-          element: document.getElementById('show'),
-          type: 'javascript',
-          text: program,
-          readOnly: "nocursor"
-        });
-      }
-      function Html(program)
-      {
-        $("#box").show();
-        codebeautifier({
-          element: document.getElementById('show'),
-          type: 'html',
-          text: program,
-          readOnly: "nocursor"
-        });
-      }
-      /*function Json(program)
-      {
-        $("#box").show();
-        codebeautifier({
-          element: document.getElementById('show'),
-          type: 'json',
-          text: program
-        });
-      }*/
-      
+     });
+
 
     </script>
   </body>
