@@ -31,7 +31,7 @@
 
 
         <label for="comment"><h3>Paste your code Here:</h3></label>
-        
+
         <textarea class="form-control" id="code" rows="6"></textarea><br>
         <button type="button" id="convert" class="btn btn-primary">Submit</button>
 
@@ -48,7 +48,7 @@
       </div>
 
     </div>
-    
+
     <script src="lib/codebeautifier.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -62,7 +62,7 @@
 
      document.execCommand('copy'); // or 'cut'
    }, false);
-      
+
       $(function(){
         $("#box").hide();
         $("#convert").on("click", function(){
@@ -80,16 +80,26 @@
           }
           else{
             $("#box").show();
-            $("#box").text(program);
+            Unknown(program);
+            console.log(program);
           }
        });
-      })
+     })
+     function Unknown(program) {
+       $("#box").show();
+       codebeautifier({
+         element: document.getElementById('show'),
+         //type: 'css',
+         text: program,
+         readOnly: "nocursor"
+       });
+     }
       function CSS(program)
       {
         $("#box").show();
         codebeautifier({
           element: document.getElementById('show'),
-          type: 'css',
+          //type: 'css',
           text: program,
           readOnly: "nocursor"
         });
@@ -123,7 +133,7 @@
           text: program
         });
       }*/
-      
+
 
     </script>
   </body>

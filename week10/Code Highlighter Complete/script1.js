@@ -1,17 +1,9 @@
-var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-  lineNumbers: false,
-  highlightMatches: true,
-  stylesheet: "lib/jscolors.css",
-  autofocus: true,
-  autoEnabled: true,
-  styleActiveLine: true,
-  indentUnit: 4
+$('#language').on('change',function(){
+    type=this.value;
 });
-editor.focus();
-    window.lastpo=localStorage.getItem("valueofcursor");
-    editor.setCursor({line: 0, ch: window.lastpo});
-//editor.setCursor();
-editor.setSize(560, 200);
+$('#fileName').on('change',function(){
+    file_name=this.value;
+});
 var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
   lineNumbers: false,
   highlightMatches: true,
@@ -21,18 +13,12 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
   styleActiveLine: true,
   indentUnit: 4
 });
-CodeMirror.commands["selectAll"](editor1);
-editor1.focus();
-    window.lastpo=localStorage.getItem("valueofcursor");
-    editor1.setCursor({line: 0, ch: window.lastpo});
 editor1.setSize(560, 200);
-   file_name=document.getElementById('fileName').value;
-    console.log(file_name)
+file_name=document.getElementById('fileName').value;
    //Adding code to div
    //$("#save").hide();
    //$("#edit").hide();
    // $('#buttons').hide();
-
    $(document).on('mouseenter', '.code', function () {
     $(this).find(".pre_icons").show();
   });
@@ -45,7 +31,8 @@ editor1.setSize(560, 200);
      //$("#edit").show();
      // $('#buttons').show();
 
-     var program=editor.getValue();
+     var user_input=$('textarea#code').val();
+     program =js_beautify(user_input, {indent_size: 2}); 
      var code_div = $(".code");
      var icon = $("#buttons");
      if($(code_div).children().length<1){
@@ -82,12 +69,11 @@ editor1.setSize(560, 200);
      type=document.getElementById('language');
      type=type.options[type.selectedIndex].value;
      file_name=document.getElementById('fileName').value;
-     editor.setValue("");
+     $('textarea#code').val();
    });
 
      $(document).on('click','.edit', function(event){
       $('#edit_modal').modal('show');
-      editor1.setValue("");
       for_update=$(this).parents(".code");
        edit_div=$(for_update).find('div.CodeMirror-code');
        edit_code = $(edit_div).clone();
@@ -95,19 +81,9 @@ editor1.setSize(560, 200);
        content_code = $(edit_code).find('div.CodeMirror-linenumber').remove();
        txt_for_update=$(edit_code).text();
        console.log(txt_for_update);
-       editor1.setValue("");
-       editor1.setValue(txt_for_update);
-       var formt=document.getElementById("code_update");
-       formt.addEventListener('mouseenter',autoFormatSelection);
-       function getSelectedRange() {
-               return { from: editor1.getCursor(true), to: editor1.getCursor(false) };
-             }
-             function autoFormatSelection() {
-               var range = getSelectedRange();
-               editor.autoFormatRange(range.from, range.to);
-             }
-
-      });
+       result = js_beautify(txt_for_update, {indent_size: 2});
+        editor1.setValue(result);
+        });
 
       $('#update_code').click(function(){
         $('#edit_modal').modal('hide');
@@ -116,6 +92,7 @@ editor1.setSize(560, 200);
         type=type.options[type.selectedIndex].value;
         file_name=document.getElementById('fileName').value;
         updated_text=editor1.getValue();
+        //updated_text=$('textarea#code_update').val()
         debugger;
         $(for_update).find('.CodeMirror').remove();
         update_div = document.createElement('div');

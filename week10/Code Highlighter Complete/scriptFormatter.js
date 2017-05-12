@@ -1,3 +1,5 @@
+sessionID = randomString();
+fileID = randomString();
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineNumbers: false,
   highlightMatches: true,
@@ -44,8 +46,71 @@ editor1.setSize(560, 200);
      //$("#save").show();
      //$("#edit").show();
      // $('#buttons').show();
+      startConvert();
+      function startConvert() {
+          allowProcessing = 1;
+          //progressOn();
+          x_ajax({
+              "req" : {
+                  "url"       : "convert/" + sessionID + "/" + fileID,
+                  "type"      : "POST",
+                  "data"      : { "code" : editor.getValue() },
+                  "dataType"  : "json"
+              },
+              "onData" : function(data) {
 
-     var program=editor.getValue();
+                  getStatus();
+              },
+              "onError" : function(data) {
+                 // progressOff();
+                  if (typeof(data.details) == "string") x_prettyError(data.details);
+                  else x_prettyError("Unexpected error.");
+              },
+              "onFail" : function() {
+                  //progressOff();
+                  x_prettyError("Unexpected error.");
+              }
+          });
+      }
+
+      function getStatus() {
+          x_ajax({
+              "req" : {
+                  "url"       : "status/" + sessionID + "/" + fileID,
+                  "type"      : "GET",
+                  "dataType"  : "json"
+              },
+              "onData" : function(data) {
+                  if (allowProcessing) {
+                      allowProcessing = null;
+                     // progressOff();
+                      editor.setValue("");
+                      if (data.format) {
+                          var newFormat;
+                          if (data.format == "JS") newFormat = "javascript";
+                          else if (data.format == "CSS") newFormat = "css";
+                          else if (data.format == "HTML") newFormat = "htmlmixed";
+                          editor.setOption("mode", newFormat);
+                      }
+                      program=data.result;
+                      //editor.focus();
+                  }
+              },
+              "onError" : function(data) {
+                  if (allowProcessing) {
+                   //   progressOff();
+                      if (typeof(data.details) == "string") x_prettyError(data.details);
+                      else x_prettyError("Unexpected error.");
+                  }
+              },
+              "onFail" : function() {
+                  //progressOff();
+                  x_prettyError("Unexpected error.");
+              },
+              "silent" : 1
+          });
+      }
+
      var code_div = $(".code");
      var icon = $("#buttons");
      if($(code_div).children().length<1){
