@@ -1301,7 +1301,7 @@ var hasSelection = window.getSelection ? function (te) {
 var hasCopyEvent = (function () {
   var e = elt("div")
   if ("oncopy" in e) { return true }
-  e.setAttribute("oncopy", "return;")
+  e.setAttribute("oncopy", "return true;")
   return typeof e.oncopy == "function"
 })()
 

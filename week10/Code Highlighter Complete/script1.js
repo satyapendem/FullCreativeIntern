@@ -1,19 +1,24 @@
+var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+  lineNumbers: false,
+  highlightMatches: true,
+  stylesheet: "lib/jscolors.css",
+  autofocus: true,
+  autoEnabled: true,
+  styleActiveLine: true,
+  indentUnit: 4
+});
+editor.focus();
+    window.lastpo=localStorage.getItem("valueofcursor");
+    editor.setCursor({line: 0, ch: window.lastpo});
+//editor.setCursor();
+editor.setSize(560, 200);
+
 $('#language').on('change',function(){
     type=this.value;
 });
 $('#fileName').on('change',function(){
     file_name=this.value;
 });
-var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
-  lineNumbers: false,
-  highlightMatches: true,
-   autoEnabled: true,
-  stylesheet: "lib/jscolors.css",
-  autofocus: true,
-  styleActiveLine: true,
-  indentUnit: 4
-});
-editor1.setSize(560, 200);
 file_name=document.getElementById('fileName').value;
    //Adding code to div
    //$("#save").hide();
@@ -32,7 +37,20 @@ file_name=document.getElementById('fileName').value;
      // $('#buttons').show();
 
      var user_input=$('textarea#code').val();
-     program =js_beautify(user_input, {indent_size: 2}); 
+     console.log(user_input);
+     var regex_html = /<\/?[\w\s="/.':;#-\/\?]+>/g;
+     if(regex_html.test(user_input)==true){
+      user_input=user_input.replace(/&amp;/g,'&amp;amp;');
+      user_input=user_input.replace(/&lt;/g,'&amp;lt;');
+      user_input=user_input.replace(/&gt;/g,'&amp;gt;');
+      user_input=user_input.replace(/\n/g,'&lt;br /&gt;\n');
+      user_input=user_input.replace(/\r/g,'');
+      program=user_input;
+      console.log("found html");
+     }
+     else{
+      program= formatCode(user_input);
+    }
      var code_div = $(".code");
      var icon = $("#buttons");
      if($(code_div).children().length<1){
@@ -69,7 +87,7 @@ file_name=document.getElementById('fileName').value;
      type=document.getElementById('language');
      type=type.options[type.selectedIndex].value;
      file_name=document.getElementById('fileName').value;
-     $('textarea#code').val();
+     $('textarea#code').val("");
    });
 
      $(document).on('click','.edit', function(event){
@@ -81,8 +99,8 @@ file_name=document.getElementById('fileName').value;
        content_code = $(edit_code).find('div.CodeMirror-linenumber').remove();
        txt_for_update=$(edit_code).text();
        console.log(txt_for_update);
-       result = js_beautify(txt_for_update, {indent_size: 2});
-        editor1.setValue(result);
+       result = formatCode(txt_for_update);
+      $('textarea#code_update').val(result);
         });
 
       $('#update_code').click(function(){
@@ -91,8 +109,8 @@ file_name=document.getElementById('fileName').value;
         type=document.getElementById('language');
         type=type.options[type.selectedIndex].value;
         file_name=document.getElementById('fileName').value;
-        updated_text=editor1.getValue();
-        //updated_text=$('textarea#code_update').val()
+        changed_text=$('textarea#code_update').val();
+        updated_text=formatCode(changed_text);
         debugger;
         $(for_update).find('.CodeMirror').remove();
         update_div = document.createElement('div');
@@ -123,8 +141,8 @@ file_name=document.getElementById('fileName').value;
       console.log(down_code);
       content_code = $(down_code).find('div.CodeMirror-linenumber').remove();
       txt_for_down=$(down_code).text();
-      console.log(txt_for_down);
-
+      downTxt=formatCode(txt_for_down);
+      console.log(downTxt);
       console.log(file_name);
       if(file_name==""){
         file_para="program";
@@ -148,7 +166,7 @@ file_name=document.getElementById('fileName').value;
 
       }
       function saveTextAsFile(file,type){
-        var textToWrite = txt_for_down;
+        var textToWrite = downTxt;
         var textFileAsBlob = new Blob([textToWrite],{
           type:'text/plain'
         });
@@ -168,3 +186,7 @@ file_name=document.getElementById('fileName').value;
         downloadLink.click();
        }
      });
+function formatCode(code) {
+  var formattedCode=js_beautify(code);
+  return formattedCode;
+}
