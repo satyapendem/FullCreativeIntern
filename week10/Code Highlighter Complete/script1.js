@@ -1,18 +1,3 @@
-var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-  lineNumbers: false,
-  highlightMatches: true,
-  stylesheet: "lib/jscolors.css",
-  autofocus: true,
-  autoEnabled: true,
-  styleActiveLine: true,
-  indentUnit: 4
-});
-editor.focus();
-    window.lastpo=localStorage.getItem("valueofcursor");
-    editor.setCursor({line: 0, ch: window.lastpo});
-//editor.setCursor();
-editor.setSize(560, 200);
-
 $('#language').on('change',function(){
     type=this.value;
 });
@@ -36,17 +21,11 @@ file_name=document.getElementById('fileName').value;
      //$("#edit").show();
      // $('#buttons').show();
 
-     var user_input=$('textarea#code').val();
+     var user_input= $('textarea#code').val();
      console.log(user_input);
      var regex_html = /<\/?[\w\s="/.':;#-\/\?]+>/g;
      if(regex_html.test(user_input)==true){
-      user_input=user_input.replace(/&amp;/g,'&amp;amp;');
-      user_input=user_input.replace(/&lt;/g,'&amp;lt;');
-      user_input=user_input.replace(/&gt;/g,'&amp;gt;');
-      user_input=user_input.replace(/\n/g,'&lt;br /&gt;\n');
-      user_input=user_input.replace(/\r/g,'');
-      program=user_input;
-      console.log("found html");
+        program=formatHtml(user_input);
      }
      else{
       program= formatCode(user_input);
@@ -61,7 +40,7 @@ file_name=document.getElementById('fileName').value;
       code_div = document.createElement('div');
       code_div.setAttribute('class','code');
       // code_div.setAttribute('id',ids);
-      code_div.innerHTML = program;
+      code_div.textContent = program;
       //debugger;
       $(".code").last().after(code_div);
       // $("#"+ids).append(new_ele);
@@ -189,4 +168,11 @@ file_name=document.getElementById('fileName').value;
 function formatCode(code) {
   var formattedCode=js_beautify(code);
   return formattedCode;
+}
+function formatHtml(s) {
+s=s.replace(/&amp;/g,'&amp;amp;');s=s.replace(/&lt;/g,'&amp;lt;');
+s=s.replace(/&gt;/g,'&amp;gt;');
+s=s.replace(/\n/g,'&lt;br /&gt;\n');
+s=s.replace(/\r/g,'');
+return s;
 }
