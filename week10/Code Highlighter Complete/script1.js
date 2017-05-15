@@ -126,6 +126,7 @@ file_name=document.getElementById('fileName').value;
            //$(code_div).innerHTML(txt_for_update);
            $(update_div).each(function() {
          var $this = $(this),
+
          $code = $this.html(),
          $unescaped = $('<div/>').html($code).text();
          $this.empty();
@@ -135,6 +136,7 @@ file_name=document.getElementById('fileName').value;
           theme: "neo",
           readOnly: "nocursor"
         });
+        CodeMirror.setSize(300,"100%");
        });
     /*end of update code click*/
     });
