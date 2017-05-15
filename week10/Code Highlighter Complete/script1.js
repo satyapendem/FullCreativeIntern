@@ -15,6 +15,7 @@ file_name=document.getElementById('fileName').value;
    $(document).on("mouseleave", ".code", function() {
      $(this).find(".pre_icons").hide();
    });
+   /*Creating and adding codemirror*/
    $("#show").click(function(event){
      $('#myModal').modal('hide');
      //$("#save").show();
@@ -67,7 +68,8 @@ file_name=document.getElementById('fileName').value;
      file_name=document.getElementById('fileName').value;
      $('textarea#code').val("");
    });
-
+   /*creating and appending the code*/
+     /*edit function*/
      $(document).on('click','.edit', function(event){
       $('#edit_modal').modal('show');
       for_update=$(this).parents(".code");
@@ -80,7 +82,8 @@ file_name=document.getElementById('fileName').value;
        result = formatCode(txt_for_update);
       $('textarea#code_update').val(result);
         });
-
+      /*edit function end*/
+      /* Update code click function*/
       $('#update_code').click(function(){
         $('#edit_modal').modal('hide');
         //debugger;
@@ -110,8 +113,9 @@ file_name=document.getElementById('fileName').value;
           readOnly: "nocursor"
         });
        });
-
+    /*end of update code click*/
     });
+    /*save code fucntion*/
      $(document).on('click','.save',function(){
       for_down=$(this).parents(".code");
       down_div=$(for_down).find('div.CodeMirror-code');
@@ -164,15 +168,19 @@ file_name=document.getElementById('fileName').value;
         downloadLink.click();
        }
      });
+     /*end of save code*/
+/*beautify function to format code*/
 function formatCode(code) {
   var formattedCode=js_beautify(code);
   return formattedCode;
 }
+/*beautify html code*/
 function formatHtml(s) {
   console.log("in Html foramtter");
   s=html_beautify(s);
 return s;
 }
+/*to check Whether html are not*/
 function found_html(source) {
             var foundHTML = source.replace(/^[ \t\n\r]+/, '');
             return foundHTML && (foundHTML.substring(0, 1) === '<');
