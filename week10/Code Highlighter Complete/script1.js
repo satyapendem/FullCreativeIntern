@@ -22,10 +22,9 @@ file_name=document.getElementById('fileName').value;
      // $('#buttons').show();
 
      var user_input= $('textarea#code').val();
-     console.log(user_input);
-     var regex_html = /<\/?[\w\s="/.':;#-\/\?]+>/g;
-     if(regex_html.test(user_input)==true){
-        program=formatHtml(user_input);
+     //console.log(user_input);
+     if(found_html(user_input)){
+       program=formatHtml(user_input);
      }
      else{
       program= formatCode(user_input);
@@ -33,7 +32,7 @@ file_name=document.getElementById('fileName').value;
      var code_div = $(".code");
      var icon = $("#buttons");
      if($(code_div).children().length<1){
-      $(code_div).append(program);
+      $(code_div).text(program);
       console.log("append");
     }
     else{
@@ -170,9 +169,11 @@ function formatCode(code) {
   return formattedCode;
 }
 function formatHtml(s) {
-s=s.replace(/&amp;/g,'&amp;amp;');s=s.replace(/&lt;/g,'&amp;lt;');
-s=s.replace(/&gt;/g,'&amp;gt;');
-s=s.replace(/\n/g,'&lt;br /&gt;\n');
-s=s.replace(/\r/g,'');
+  console.log("in Html foramtter");
+  s=html_beautify(s);
 return s;
 }
+function found_html(source) {
+            var foundHTML = source.replace(/^[ \t\n\r]+/, '');
+            return foundHTML && (foundHTML.substring(0, 1) === '<');
+        }
